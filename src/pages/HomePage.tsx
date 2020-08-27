@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState, useRef} from "react";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,6 +13,7 @@ import { getStats } from '../actions/stats'
 export function HomePage() {
 	const classes = useStyles();
 	const dispatch = useDispatch()
+	const isRangeSelected = useRef(0)
 	const [filter, setFilter] = useState({
 		startDate: moment().subtract(1, 'day').toDate(),
 		endDate: moment().toDate(),
@@ -21,13 +22,29 @@ export function HomePage() {
 	const statsList = stats.list;
 	const statsLoading = stats.loading;
 
-	const handleDateChange = useCallback(value => setFilter(value), [setFilter])
+	const handleDateChange = useCallback(value => {
+		isRangeSelected.current = isRangeSelected.current + 1
+		setFilter(value)
+	}, [setFilter])
 
-	useEffect(() => {
+	const fetchStats = useCallback(
+	() =>
 		dispatch(getStats({
 			startDate: moment(filter.startDate).format(DATE_FILTER_FORMAT),
 			endDate: moment(filter.endDate).format(DATE_FILTER_FORMAT),
-		}))
+		})),
+	[filter]
+	)
+
+	useEffect(() => {
+		fetchStats()
+	}, [])
+
+	useEffect(() => {
+		if (isRangeSelected.current > 1) {
+			fetchStats()
+			isRangeSelected.current = 0
+		}
 	}, [filter])
 
 	return (
