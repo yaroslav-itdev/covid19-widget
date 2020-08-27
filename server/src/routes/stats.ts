@@ -25,7 +25,7 @@ router.get('/', async (req: Request, res: Response) => {
         const stats: IStat[] = statsByCountries[countryName] || []
         const alpha3ContryCode = getAlpha2Code(countryName, DEFAULT_COUNTRY_CODE_LANG)
         const statsSummary: StatResult = stats.reduce((accumulator: StatResult, stat: IStat) => {
-            if (moment(stat.date, DATE_FILTER_FORMAT).isBetween(mStartDate, mEndDate)) {
+            if (moment(stat.date, DATE_FILTER_FORMAT).isBetween(mStartDate, mEndDate, null, '[]')) {
                 accumulator.confirmed += stat.confirmed
                 accumulator.recovered += stat.recovered
                 accumulator.deaths += stat.deaths
