@@ -16,7 +16,7 @@ export function HomePage() {
 		startDate: moment().subtract(1, 'day').toDate(),
 		endDate: moment().toDate(),
 	})
-	const stats = useSelector((state: RootState) => state.stats);
+	const statsList = useSelector((state: RootState) => state.stats.list);
 
 	const handleDateChange = useCallback(value => setFilter(value), [setFilter])
 
@@ -36,7 +36,7 @@ export function HomePage() {
 				<DateRangePicker onChange={handleDateChange} startDate={filter.startDate} endDate={filter.endDate} />
 			</div>
 			<div className={classes.centerContainer}>
-				<Graph />
+				<Graph data={statsList} />
 			</div>
 		</div>
 	);

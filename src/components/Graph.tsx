@@ -1,37 +1,61 @@
-import React, { useRef } from "react";
-import { makeStyles, Paper } from "@material-ui/core";
+import React, { useMemo } from 'react';
+import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as Highcharts from 'highcharts';
-import {Stat} from "../model";
+import highchartsMap from 'highcharts/modules/map';
+import WorldGeoJSON from '@highcharts/map-collection/custom/world.geo.json';
+import { Stat } from "../model";
 
 interface Props {
-
+	data: Stat[];
 }
 
+highchartsMap(Highcharts);
+
 export default (props: Props) => {
-	const {  } = props;
-	const classes = useStyles(props);
-	const options: Highcharts.Options = {
+	const { data } = props
+	const options = useMemo(() => ({
+		title: {
+			text: 'My chart',
+		},
+		chart: {
+			map: WorldGeoJSON,
+		},
+		plotOptions: {
+			map: {
+				mapData: WorldGeoJSON,
+				allAreas: true,
+				joinBy: ['iso-a2', 'code'],
+				dataLabels: {
+					enabled: true,
+					color: 'white',
+					style: {
+						fontWeight: 'bold',
+					},
+				},
+				tooltip: {
+					headerFormat: '',
+					pointFormat: `<div>
+					  <div>{point.code}</div>:
+					  <div>Confirmed: {point.confirmed}</div>
+					  <div>Recovered: {point.recovered}</div>
+					  <div>Deaths: {point.deaths}</div>
+					</div>`,
+				},
+			},
+		},
 		series: [{
-			type: 'line',
-			data: [1, 2, 3]
-		}]
-	}
+			name: 'Countries with statistic',
+			data,
+		}],
+	}), [data]);
 
 	return (
-		<Paper className={classes.wrapper}>
+		<div>
 			<HighchartsReact
 				highcharts={Highcharts}
 				options={options}
-				constructorType = { 'mapChart' }
-				{...props}
+				constructorType="mapChart"
 			/>
-		</Paper>
+		</div>
 	);
 }
-
-const useStyles = makeStyles({
-	wrapper: {
-
-	},
-});
