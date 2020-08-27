@@ -14,9 +14,6 @@ highchartsMap(Highcharts);
 export default (props: Props) => {
 	const { data } = props
 	const options = useMemo(() => ({
-		title: {
-			text: 'My chart',
-		},
 		chart: {
 			map: WorldGeoJSON,
 		},
