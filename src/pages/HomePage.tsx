@@ -6,6 +6,7 @@ import moment from 'moment'
 import { DATE_FILTER_FORMAT } from "../constants";
 import Graph from "../components/Graph";
 import DateRangePicker from "../components/DateRangePicker";
+import LoadingIndicator from "../components/LoadingIndicator";
 import { RootState } from "../reducers";
 import { getStats } from '../actions/stats'
 
@@ -16,7 +17,9 @@ export function HomePage() {
 		startDate: moment().subtract(1, 'day').toDate(),
 		endDate: moment().toDate(),
 	})
-	const statsList = useSelector((state: RootState) => state.stats.list);
+	const stats = useSelector((state: RootState) => state.stats);
+	const statsList = stats.list;
+	const statsLoading = stats.loading;
 
 	const handleDateChange = useCallback(value => setFilter(value), [setFilter])
 
@@ -36,7 +39,7 @@ export function HomePage() {
 				<DateRangePicker onChange={handleDateChange} startDate={filter.startDate} endDate={filter.endDate} />
 			</div>
 			<div className={classes.centerContainer}>
-				<Graph data={statsList} />
+				{statsLoading ? <LoadingIndicator /> : <Graph data={statsList} />}
 			</div>
 		</div>
 	);
