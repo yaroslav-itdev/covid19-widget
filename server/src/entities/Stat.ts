@@ -9,5 +9,5 @@ export type StatResult = {
     confirmed: number,
     recovered: number,
     deaths: number,
-    code: string,
+    code?: string,
 }
