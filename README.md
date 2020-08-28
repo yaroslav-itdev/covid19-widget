@@ -1,6 +1,6 @@
 ## How to use
 
-Start front
+Start front:
 
 ```bash
 npm i
@@ -13,4 +13,17 @@ Start server:
 cd server/
 npm i
 npm start
+```
+
+Test front:
+
+```bash
+npm test
+```
+
+Test server:
+
+```bash
+cd server/
+npm test
 ```
