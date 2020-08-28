@@ -1,7 +1,5 @@
-import moment from 'moment'
-import { StatActions, StatAction, Stat, InitialReducerStateInterface } from "../model";
+import { StatActions, StatAction, InitialReducerStateInterface } from "../model";
 import createReducer from "./createReducer";
-import { DATE_FILTER_FORMAT } from '../constants'
 
 const initialState = {
 	list: [],

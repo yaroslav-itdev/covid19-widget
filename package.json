@@ -6,8 +6,6 @@
 		"@material-ui/core": "4.9.0",
 		"@material-ui/icons": "4.5.1",
 		"@material-ui/styles": "4.9.0",
-		"@types/react-date-range": "^0.95.1",
-		"@types/react-loader-spinner": "^3.1.0",
 		"axios": "^0.20.0",
 		"date-fns": "^2.15.0",
 		"highcharts": "^8.2.0",
@@ -29,7 +27,7 @@
 	"scripts": {
 		"start": "env-cmd -e dev react-scripts start",
 		"build": "env-cmd -e prod react-scripts build",
-		"test": "env-cmd -e test react-scripts test",
+		"test": "env-cmd -e test jest",
 		"eject": "react-scripts eject"
 	},
 	"browserslist": [
@@ -39,16 +37,27 @@
 		"not op_mini all"
 	],
 	"devDependencies": {
-		"@types/jest": "24.0.25",
+		"@babel/core": "^7.11.4",
+		"@babel/preset-env": "^7.11.0",
+		"@babel/preset-react": "^7.10.4",
+		"@babel/preset-typescript": "^7.10.4",
+		"@types/jest": "^24.0.25",
 		"@types/node": "12.12.18",
 		"@types/react": "16.9.19",
+		"@types/react-date-range": "^0.95.1",
 		"@types/react-dom": "16.9.5",
+		"@types/react-loader-spinner": "^3.1.0",
 		"@types/react-redux": "7.1.7",
 		"@types/react-router-dom": "5.1.3",
+		"@types/react-test-renderer": "^16.9.3",
 		"@types/redux-logger": "3.0.7",
 		"@types/webpack-env": "1.15.1",
+		"babel-jest": "^26.3.0",
 		"env-cmd": "^10.1.0",
 		"eslint-plugin-react": "7.17.0",
+		"jest": "^26.4.2",
+		"react-test-renderer": "^16.13.1",
+		"ts-jest": "^26.3.0",
 		"typescript": "^3.7.5"
 	}
 }

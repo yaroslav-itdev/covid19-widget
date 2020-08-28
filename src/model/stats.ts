@@ -1,5 +1,5 @@
 export interface Stat {
-  country: string;
+  code: string;
   confirmed: number;
   deaths: number;
   recovered: number;
